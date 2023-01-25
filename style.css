@@ -1,0 +1,21 @@
+body {
+    background-color: #209CEE;
+    text-align: center;
+}
+
+button {
+    background-color: #FFFFFF;
+}
+
+textarea {
+    width: 60%;
+    margin: 0 auto;
+    display: block;
+}
+
+form {
+    width: 60%;
+    margin: 0 auto;
+    display: block;
+}
+

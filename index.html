@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Topify!</title>
+</head>
+<body>
+    <form method="POST" action=".">
+        <textarea name="text"></textarea>
+        <button type="submit">Topify!</button>
+    </form>
+    {% if topified_text %}
+        <textarea>{{ topified_text }}</textarea>
+    {% endif %}
+</body>
+</html>

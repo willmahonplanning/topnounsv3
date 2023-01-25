@@ -1,1 +1,0 @@
-start: /opt/render/project/src/.venv/bin/python -m pip install --upgrade pip && python topnounsv3.py

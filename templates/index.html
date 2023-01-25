@@ -1,15 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="/style.css">
     <title>Topify!</title>
 </head>
 <body>
-    <form method="POST" action=".">
-        <textarea name="text"></textarea>
-        <button type="submit">Topify!</button>
+    <h1>Topify!</h1>
+    <form method="POST" action="{{ url_for('topnounsv3') }}">
+        <label for="text">Input text:</label><br>
+        <textarea id="text" name="text"></textarea><br>
+        <input type="submit" value="Topify!">
     </form>
-    {% if topified_text %}
-        <textarea>{{ topified_text }}</textarea>
+    {% if modified_text %}
+    <h2>Modified text:</h2>
+    <textarea id="modified_text" readonly>{{ modified_text }}</textarea><br>
+    <button onclick="copyText()">Copy to clipboard</button>
+    <script>
+        function copyText() {
+            var copyText = document.getElementById("modified_text");
+            copyText.select();
+            document.execCommand("copy");
+            alert("Copied the text: " + copyText.value);
+        }
+    </script>
     {% endif %}
 </body>
 </html>

@@ -1,22 +1,22 @@
-from flask import Flask, request, jsonify
-from nltk import pos_tag, word_tokenize
+import nltk
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-@app.route('/process_text', methods=['POST'])
-def process_text():
-    text = request.json['text']
-    appended_text = append_top_to_nouns(text)
-    return jsonify(appended_text=appended_text)
-
-def append_top_to_nouns(text):
-    appended_text = ""
-    for word, pos in pos_tag(word_tokenize(text)):
-        if pos[0] == 'N':
-            appended_text += word + "top "
-        else:
-            appended_text += word + " "
-    return appended_text
+@app.route('/', methods=['GET', 'POST'])
+def topnounsv3():
+    if request.method == 'POST':
+        text = request.form['text']
+        words = nltk.word_tokenize(text)
+        tagged_words = nltk.pos_tag(words)
+        topified_text = ""
+        for word in tagged_words:
+            if word[1] == 'NN':
+                topified_text += "top" + word[0] + " "
+            else:
+                topified_text += word[0] + " "
+        return render_template('index.html', topified_text=topified_text)
+    return render_template('index.html')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080)
+    app.run()
